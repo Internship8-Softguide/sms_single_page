@@ -55,15 +55,8 @@
 </div>
 
 <script>
-    let getData = async ()=>{
-      let data =  await $.ajax({
-           url:"./server/application/dashboard/home.php",
-           method:"GET",
-           data:"json"
-       });
-       return data;
-    }
-    getData().then((response)=>{
+    let url = `./server/application/dashboard/home.php`;
+    sendGetRequest(url).then((response)=>{
         console.log(response)
         if(response.code == 500){
             $("#loadPage").load("./pages/500.html");
