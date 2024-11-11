@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <script src="./assets/js/bootstrap.min.js"></script>
+    <script src="./assets/js/jquery.js"></script>
+</head>
+<body>
+    <div class="main">
+        <div class="sidebar">
+            <div class="sidebar-header my-4 ps-4">
+              <p class="fs-5">ST-Management</p>
+            </div>
+            <div class="menu">
+              <div data-page="home" class="menu-item ms-4 my-2">
+                <i class="bi bi-grid"></i>
+                <a class="menu-list">Dashboard</a>
+              </div>
+            </div>
+            <div class="menu">
+              <div data-page="class_list" class="menu-item ms-4 my-2">
+                <i class="bi bi-bank"></i>
+                <a class="menu-list">Class</a>
+              </div>
+            </div>
+            <div class="menu">
+              <div data-page="teacher_list" class="menu-item ms-4 my-2">
+                <i class="bi bi-mortarboard-fill"></i>
+                <a class="menu-list">Teacher</a>
+              </div>
+            </div>
+            <div class="menu">
+              <div data-page="batch_list" class="menu-item ms-4 my-2">
+                <i class="bi bi-book"></i>
+                <a class="menu-list">Batch</a>
+              </div>
+            </div>
+            <div class="menu">
+              <div data-page="student_list" class="menu-item ms-4 my-2">
+                <i class="bi bi-people"></i>
+                <a class="menu-list">Student</a>
+              </div>
+            </div>
+        </div>
+        <div class="content">
+            <nav class="bg-white d-flex p-3 px-4 justify-content-between align-items-center">
+                <div>
+                  <form method="post">
+                    <div class="d-flex search">
+                      <i class="bi bi-search"></i>
+                      <input type="text" name="search" placeholder="Search" />
+                    </div>
+                  </form>
+                </div>
+                <div>
+                  <div class="dropdown">
+                    <div
+                      type="button"
+                      data-bs-toggle="dropdown"
+                    >
+                      <img class="profile" src="./assets/img/profile.png">
+                    </div>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#">Profile</a></li>
+                      <li><a class="dropdown-item" href="#">Logout</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </nav>
+              <div id="loadPage" class="page p-4">
+
+              </div>
+        </div>
+    </div>
+    <script src="./assets/js/loadPage.js"></script>
+</body>
+</html>
