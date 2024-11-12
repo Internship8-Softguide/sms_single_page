@@ -55,8 +55,7 @@
 </div>
 
 <script>
-    let url = `./server/application/dashboard/home.php`;
-    sendGetRequest(url).then((response)=>{
+    sendGetRequest(url+"dashboard/home.php").then((response)=>{
         console.log(response)
         if(response.code == 500){
             $("#loadPage").load("./pages/500.html");
