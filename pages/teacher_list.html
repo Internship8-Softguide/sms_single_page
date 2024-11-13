@@ -3,7 +3,7 @@
 
 <div class="card">
     <div class="card-header d-flex justify-content-end">
-        <a href="./add_teacher.php" class="btn btn-secondary"> Add New Teacher</a>
+        <button id="student_add" class="btn btn-secondary"> Add New Teacher</button>
     </div>
     <div class="card-body">
         <table class="table table-border">
@@ -82,6 +82,16 @@
       }
       $("#close").click();
     })
+  })
+
+  $("#student_add").on("click",()=>{
+    $("#loadPage").load(`./pages/add_teacher.html`, (response, status, xhr) => {
+            if (status === "success") {
+                localStorage.setItem("currentPage", 'add_teacher');
+            } else {
+                location.replace("./404.html")
+            }
+        });
   })
   get_all_teacher();
 </script>
