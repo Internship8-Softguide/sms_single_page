@@ -64,6 +64,18 @@
     del.on("click",()=>{
       deleteKey = data.teacher_id;
     })
+
+    edit.on("click",()=>{
+      add_edit = true;
+      temp = data;
+      $("#loadPage").load(`./pages/add_teacher.html`, (response, status, xhr) => {
+            if (status === "success") {
+                localStorage.setItem("currentPage", 'add_teacher');
+            } else {
+                location.replace("./404.html")
+            }
+        });
+    })
   }
   get_all_teacher = ()=>{
     $("#teacher_list").html("");
@@ -85,6 +97,7 @@
   })
 
   $("#student_add").on("click",()=>{
+    add_edit = false;
     $("#loadPage").load(`./pages/add_teacher.html`, (response, status, xhr) => {
             if (status === "success") {
                 localStorage.setItem("currentPage", 'add_teacher');
