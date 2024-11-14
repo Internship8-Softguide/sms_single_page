@@ -29,16 +29,25 @@
 </div>
 
 <script>
-    edit_id = localStorage.getItem("temp_id");
-    if(edit_id){
+    temp = localStorage.getItem("temp");
+    if(temp){
         $("#title").text("Update Teacher");
         $("#submit").text("Update");
-        sendGetRequest(url + "teacher/get_teacher.php?id="+edit_id).then((response)=>{
-            $("#teacher_name").val(response.teacher_name);
-            $("#teacher_email").val(response.teacher_email);
-            $("#exp").val(response.exp);
-        })
+        let teacher = JSON.parse(temp);
+        $("#teacher_name").val(teacher.teacher_name);
+        $("#teacher_email").val(teacher.teacher_email);
+        $("#exp").val(teacher.exp);
     }
+    // edit_id = localStorage.getItem("temp_id");
+    // if(edit_id){
+    //     $("#title").text("Update Teacher");
+    //     $("#submit").text("Update");
+    //     sendGetRequest(url + "teacher/get_teacher.php?id="+edit_id).then((response)=>{
+    //         $("#teacher_name").val(response.teacher_name);
+    //         $("#teacher_email").val(response.teacher_email);
+    //         $("#exp").val(response.exp);
+    //     })
+    // }
     $("#teacher_form").on("submit",(e)=>{
         e.preventDefault();
         let teacher_name = $("#teacher_name").val();

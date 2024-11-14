@@ -7,6 +7,11 @@ $(() => {
         menu.addEventListener("click", () => loadPage(screen))
     });
     const loadPage = (screen = "home") => {
+        if (screen.endsWith("list")) {
+            console.log("list page")
+            localStorage.removeItem("temp");
+            temp = undefined;
+        }
         page.load(`./pages/${screen}.html`, (response, status, xhr) => {
             if (status === "success") {
                 localStorage.setItem("currentPage", screen);

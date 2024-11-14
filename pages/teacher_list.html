@@ -3,7 +3,7 @@
 
 <div class="card">
     <div class="card-header d-flex justify-content-end">
-        <button id="student_add" class="btn btn-secondary"> Add New Teacher</button>
+        <button id="teacher_add" class="btn btn-secondary"> Add New Teacher</button>
     </div>
     <div class="card-body">
         <table class="table table-border">
@@ -67,7 +67,8 @@
 
     edit.on("click",()=>{
       add_edit = true;
-      localStorage.setItem("temp_id",data.teacher_id);
+      localStorage.setItem("temp",JSON.stringify(data));
+      // localStorage.setItem("temp_id",data.teacher_id);
       $("#loadPage").load(`./pages/add_teacher.html`, (response, status, xhr) => {
             if (status === "success") {
                 localStorage.setItem("currentPage", 'add_teacher');
@@ -96,7 +97,7 @@
     })
   })
 
-  $("#student_add").on("click",()=>{
+  $("#teacher_add").on("click",()=>{
     add_edit = false;
     $("#loadPage").load(`./pages/add_teacher.html`, (response, status, xhr) => {
             if (status === "success") {
