@@ -21,7 +21,7 @@
                 <input type="text" name="exp" class="form-control" id="exp" >
                 <div class="text-danger" style="font-size:12px;"></div>
             </div>
-            <button class="btn btn-primary">Submit</button>
+            <button class="btn btn-primary" id="submit">Submit</button>
         </form>
             </div>
         </div>
@@ -29,9 +29,15 @@
 </div>
 
 <script>
-    if(add_edit){
+    edit_id = localStorage.getItem("temp_id");
+    if(edit_id){
         $("#title").text("Update Teacher");
-        console.log(temp)
+        $("#submit").text("Update");
+        sendGetRequest(url + "teacher/get_teacher.php?id="+edit_id).then((response)=>{
+            $("#teacher_name").val(response.teacher_name);
+            $("#teacher_email").val(response.teacher_email);
+            $("#exp").val(response.exp);
+        })
     }
     $("#teacher_form").on("submit",(e)=>{
         e.preventDefault();
