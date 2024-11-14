@@ -67,8 +67,8 @@
 
     edit.on("click",()=>{
       add_edit = true;
-      localStorage.setItem("temp",JSON.stringify(data));
-      // localStorage.setItem("temp_id",data.teacher_id);
+      // localStorage.setItem("temp",JSON.stringify(data));
+      localStorage.setItem("temp_id",data.teacher_id);
       $("#loadPage").load(`./pages/add_teacher.html`, (response, status, xhr) => {
             if (status === "success") {
                 localStorage.setItem("currentPage", 'add_teacher');

@@ -1,0 +1,88 @@
+<h2 id="title">Add Batch</h2>
+
+<div class="card">
+    <div class="card-body">
+        <div class="card col-4">
+            <div class="card-body">
+            <form id="class_form" method="post">  
+                    <div></div>
+            <div class="form-group my-3">
+                <label for="batch_name" class="form-label">Batch Name</label>
+                <input type="text" name="batch_name" class="form-control" id="batch_name" >
+                <div class="text-danger" style="font-size:12px;" id="batch_name_err"></div>
+            </div>
+            <div class="row">
+
+                <div class="form-group my-3 col-6">
+                    <label for="start" class="form-label">Start Date</label>
+                    <input type="date" name="start" class="form-control" id="start">
+                    <div class="text-danger" style="font-size:12px;" id="start_err"></div>
+                </div>
+                <div class="form-group my-3 col-6">
+                    <label for="end" class="form-label">End date</label>
+                    <input type="date" name="end" class="form-control" id="end" >
+                    <div class="text-danger" style="font-size:12px;" id="end_err"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group my-3 col-6">
+                    <label for="class_id" class="form-label">Class</label>
+                    <select name="class_id" id="class_id" class="form-select">
+                        <option value="" selected  >Select Class</option>
+                        
+                    </select>
+                    <div class="text-danger" style="font-size:12px;" id="class_id_err"></div>
+                </div>
+                <div class="form-group my-3 col-6">
+                    <label for="teacher_id" class="form-label">Teacher</label>
+                    <select name="teacher_id" id="teacher_id" class="form-select">
+                        <option value="" selected  >Select Teacher</option>
+                        
+                    </select>
+                    <div class="text-danger" style="font-size:12px;" id="teacher_id_err"></div>
+                </div>
+            </div>
+            <div class="form-group my-3">
+                <label for="fees" class="form-label">Fees</label>
+                <input type="text" name="fees" class="form-control" id="fees" >
+                <div class="text-danger" style="font-size:12px;" id="fees_err"></div>
+            </div>
+            <div class="form-group my-3">
+                <label for="description" class="form-label">Description </label>
+                <textarea name="description" id="description" class="form-control" style="height: 100px;"></textarea>
+                <div class="text-danger" style="font-size:12px;" id="description_err"></div>
+            </div> 
+            <button class="btn btn-primary">Submit</button>
+        </form>
+            </div>
+        </div>
+            
+    </div>
+</div>
+
+<script>
+    sendGetRequest(url+"teacher/get_teacher_list.php").then((response)=>{
+      response.forEach((teacher) => {
+        let opt = $("<option>").text(teacher.teacher_name).val(teacher.teacher_id);
+        $("#teacher_id").append(opt);
+      });
+    });
+    sendGetRequest(url+"class/get_class_list.php").then((response)=>{
+      response.forEach((cls) => {
+        let opt = $("<option>").text(cls.class_name).val(cls.class_id);
+        $("#class_id").append(opt);
+      });
+    });
+    $("#class_form").on("submit",(e)=>{
+        e.preventDefault();
+        let batch =$("#class_form").serializeArray();
+        let batch_data = {};
+        batch.forEach((input)=>{
+            if(input.value == '' ){
+                $(`#${input.name}_err`).text("Can't be blank!")
+            }
+            batch_data[input['name']] = input['value']
+        })
+        console.log(batch_data)
+    });
+</script>

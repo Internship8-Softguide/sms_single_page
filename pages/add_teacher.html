@@ -29,25 +29,25 @@
 </div>
 
 <script>
-    temp = localStorage.getItem("temp");
-    if(temp){
-        $("#title").text("Update Teacher");
-        $("#submit").text("Update");
-        let teacher = JSON.parse(temp);
-        $("#teacher_name").val(teacher.teacher_name);
-        $("#teacher_email").val(teacher.teacher_email);
-        $("#exp").val(teacher.exp);
-    }
-    // edit_id = localStorage.getItem("temp_id");
-    // if(edit_id){
+    // temp = localStorage.getItem("temp");
+    // if(temp){
     //     $("#title").text("Update Teacher");
     //     $("#submit").text("Update");
-    //     sendGetRequest(url + "teacher/get_teacher.php?id="+edit_id).then((response)=>{
-    //         $("#teacher_name").val(response.teacher_name);
-    //         $("#teacher_email").val(response.teacher_email);
-    //         $("#exp").val(response.exp);
-    //     })
+    //     temp = JSON.parse(temp);
+    //     $("#teacher_name").val(temp.teacher_name);
+    //     $("#teacher_email").val(temp.teacher_email);
+    //     $("#exp").val(temp.exp);
     // }
+    edit_id = localStorage.getItem("temp_id");
+    if(edit_id){
+        $("#title").text("Update Teacher");
+        $("#submit").text("Update");
+        sendGetRequest(url + "teacher/get_teacher.php?id="+edit_id).then((response)=>{
+            $("#teacher_name").val(response.teacher_name);
+            $("#teacher_email").val(response.teacher_email);
+            $("#exp").val(response.exp);
+        })
+    }
     $("#teacher_form").on("submit",(e)=>{
         e.preventDefault();
         let teacher_name = $("#teacher_name").val();
@@ -58,13 +58,26 @@
             teacher_email,
             exp,
         }
-        sendPostRequest(url + "teacher/add_teacher.php",teacher).then((response)=>{
-            $("#vm").removeClass().text("");
-            if(response.code !== 200){
-                $("#vm").addClass("alert alert-danger").text(response.message);
-            }else{
-                $("#vm").addClass("alert alert-success").text(response.message);
-            }
-        })
+        if(edit_id){
+            sendUpdateRequest(url + "teacher/update_teacher.php?id="+edit_id,teacher).then((response)=>{
+                $("#vm").removeClass().text("");
+                if(response.code !== 200){
+                    localStorage.removeItem("temp");
+                    temp = undefined;
+                    $("#vm").addClass("alert alert-danger").text(response.message);
+                }else{
+                    $("#vm").addClass("alert alert-success").text(response.message);
+                }
+            })
+        }else{
+            sendPostRequest(url + "teacher/add_teacher.php",teacher).then((response)=>{
+                $("#vm").removeClass().text("");
+                if(response.code !== 200){
+                    $("#vm").addClass("alert alert-danger").text(response.message);
+                }else{
+                    $("#vm").addClass("alert alert-success").text(response.message);
+                }
+            })
+        }
     })
 </script>
